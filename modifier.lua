@@ -18,6 +18,10 @@ minetest.register_chatcommand("show_node_types", {
 })
 
 function node_texture_modifier.add_node_too_type(node, node_type)
+	if not minetest.registered_nodes[node] then
+		return
+	end
+
 	if not node_texture_modifier.node_types[""..node_type..""] then
 		node_texture_modifier.node_types[""..node_type..""] = {node}
 	else
