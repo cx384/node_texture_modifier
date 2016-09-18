@@ -1,0 +1,9 @@
+default
+dye
+wool
+bucket
+moreblocks?
+darkage?
+mining_plus?
+itemframes?
+xdecor?

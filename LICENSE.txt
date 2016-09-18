@@ -1,0 +1,3 @@
+Textures taken from default  "https://github.com/minetest/minetest"
+
+Everything else WTFPL 
