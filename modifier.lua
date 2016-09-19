@@ -74,8 +74,10 @@ local function update_formspec(pos)
 			"list[current_name;out;2,0.3;7,5;]" ..
 			"list[current_player;main;1,5.85;8,1;]" ..
 			"list[current_player;main;1,7.08;8,3;8]" ..
-			"listring[current_name;main]" ..
 			"listring[current_player;main]" ..
+			"listring[current_name;in]" ..
+			"listring[current_player;main]" ..
+			"listring[current_name;out]" ..
 			"label[0,1.6;Node Type: "..node_type.."]" ..
 			"button[0,4;1,1;left;<-]" ..
 			"label[0,3.5;Page: "..page.."]" ..
@@ -92,8 +94,10 @@ local function update_formspec(pos)
 			"list[current_name;out;2,0.3;7,5;]" ..
 			"list[current_player;main;1,5.85;8,1;]" ..
 			"list[current_player;main;1,7.08;8,3;8]" ..
-			"listring[current_name;main]" ..
 			"listring[current_player;main]" ..
+			"listring[current_name;in]" ..
+			"listring[current_player;main]" ..
+			"listring[current_name;out]" ..
 			"button[0,4;1,1;left;<-]" ..
 			"label[0,3.5;Page: "..page.."]" ..
 			"button[1,4;1,1;right;->]" ..
