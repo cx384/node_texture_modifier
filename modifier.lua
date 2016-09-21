@@ -134,7 +134,7 @@ local function return_items(stack,player)
 
 	local excess = inv:add_item("main",stack)
 	if excess and not excess:is_empty() then
-		minetest.item_drop(excess,player,player:get_pos())
+		minetest.item_drop(excess,player,player:getpos())
 	end
 end
 
