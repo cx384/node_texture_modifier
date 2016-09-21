@@ -129,6 +129,15 @@ local function get_real_count(instack,new_stack,stack)
 	return stack:get_count()
 end
 
+local function return_items(stack,player)
+	local inv = player:get_inventory()
+
+	local excess = inv:add_item("main",stack)
+	if excess and not excess:is_empty() then
+		minetest.item_drop(excess,player,player:get_pos())
+	end
+end
+
 minetest.register_node("node_texture_modifier:node_texture_modifier", {
 	description = "Node Texture Modifier",
 	tiles = {"node_texture_modifier_node_texture_modifier.png", "node_texture_modifier_node_texture_modifier.png",
@@ -162,14 +171,21 @@ minetest.register_node("node_texture_modifier:node_texture_modifier", {
 	on_metadata_inventory_put = function(pos)
 		update_formspec(pos)
 	end,
-	on_metadata_inventory_take = function(pos, listname, index, stack)
+	on_metadata_inventory_take = function(pos, listname, index, stack, player)
 		if listname=="out" then
 			local meta = minetest.get_meta(pos)
 			local inv = meta:get_inventory()
+
 			local instack = inv:get_stack("in", 1)
 			local new_stack = inv:get_stack("out",index)
 			local count = get_real_count(instack,new_stack,stack)
 			local newcount = instack:get_count()-count
+
+			-- Return items if a right-click swap has happened
+			if new_stack:get_name() ~= stack:get_name() then
+				return_items(new_stack,player)
+			end
+
 			inv:set_stack("in", 1, instack:get_name().." "..newcount )
 		end
 		update_formspec(pos, stack)
