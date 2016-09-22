@@ -119,7 +119,8 @@ end
 
 local function get_real_count(instack,new_stack,stack)
 	if not new_stack:is_empty() then
-		if new_stack:get_name() ~= stack:get_name() then
+		if new_stack:get_name() ~= stack:get_name() 
+		or new_stack:get_count() == new_stack:get_stack_max() then
 			return instack:get_count()
 		elseif new_stack:get_count() + stack:get_count() > stack:get_stack_max() then
 			return stack:get_count() - new_stack:get_count()
@@ -182,7 +183,8 @@ minetest.register_node("node_texture_modifier:node_texture_modifier", {
 			local newcount = instack:get_count()-count
 
 			-- Return items if a right-click swap has happened
-			if new_stack:get_name() ~= stack:get_name() then
+			if new_stack:get_name() ~= stack:get_name()
+			or new_stack:get_count() == new_stack:get_stack_max() then
 				return_items(new_stack,player)
 			end
 
