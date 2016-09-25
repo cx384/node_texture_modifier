@@ -186,12 +186,12 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		not_similar = {
 			{
 			name = "node_texture_modifier:sandstonebrick_old1", 
-			description = "Desert Sandstone Brick Old1", 
+			description = "Sandstone Brick Old1", 
 			tiles = {"node_texture_modifier_sandstone_brick_old1.png"},
 			},
 			{
 			name = "node_texture_modifier:sandstonebrick_old2", 
-			description = "Desert Sandstone Brick Old2", 
+			description = "Sandstone Brick Old2", 
 			tiles = {"node_texture_modifier_sandstone_brick_old2.png"},
 			},
 		},	
