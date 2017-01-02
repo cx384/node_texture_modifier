@@ -1,3 +1,0 @@
-#Config
-node_texture_modifier_old_nodes (Old Nodes) bool true
-node_texture_modifier_display_node_type (Display Nodetyp) bool true

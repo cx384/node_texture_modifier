@@ -1,0 +1,2 @@
+#Config
+node_texture_modifier_display_node_type (Display Nodetyp) bool true

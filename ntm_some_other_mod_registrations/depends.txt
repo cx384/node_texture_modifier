@@ -1,7 +1,4 @@
-default
-dye
-wool
-bucket
+node_texture_modifier
 moreblocks?
 darkage?
 mining_plus?

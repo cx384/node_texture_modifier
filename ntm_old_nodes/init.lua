@@ -1,4 +1,5 @@
 
+
 local function is_similar(gspon_ndt_table, tnot_similar, th)
 	if gspon_ndt_table[""..th..""] then
 		return gspon_ndt_table[""..th..""]
@@ -20,40 +21,40 @@ local function register_similar_nodes(gspon_ndt_table)
 			end
 		end
 		minetest.register_node(tnot_similar["name"], node_definition)
-		node_texture_modifier.add_node_too_type(tnot_similar["name"],
-			is_similar(gspon_ndt_table, tnot_similar, "node_type"))
+		node_texture_modifier.add_node_too_type(
+			string.sub(tnot_similar["name"], 2),
+			is_similar(gspon_ndt_table, tnot_similar, "node_type")
+		)
 	end
 end
-
-if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
-	not minetest.setting_get("node_texture_modifier_old_nodes") then
+if minetest.get_modpath("default") then
 	register_similar_nodes({
 		node_type = "cobble", 
 		groups = minetest.registered_nodes["default:cobble"].groups,
 		sounds = minetest.registered_nodes["default:cobble"].sounds,
 		not_similar = {
 			{
-			name = "node_texture_modifier:cobble_old1", 
+			name = ":node_texture_modifier:cobble_old1", 
 			description = "Cobblestone Old1", 
 			tiles = {"node_texture_modifier_cobble_old1.png"},
 			},
 			{
-			name = "node_texture_modifier:cobble_old2", 
+			name = ":node_texture_modifier:cobble_old2", 
 			description = "Cobblestone Old2", 
 			tiles = {"node_texture_modifier_cobble_old2.png"},
 			},
 			{
-			name = "node_texture_modifier:cobble_old3", 
+			name = ":node_texture_modifier:cobble_old3", 
 			description = "Cobblestone Old3", 
 			tiles = {"node_texture_modifier_cobble_old3.png"},
 			},
 			{
-			name = "node_texture_modifier:cobble_old4", 
+			name = ":node_texture_modifier:cobble_old4", 
 			description = "Cobblestone Old4", 
 			tiles = {"node_texture_modifier_cobble_old4.png"},
 			},
 			{
-			name = "node_texture_modifier:cobble_old5", 
+			name = ":node_texture_modifier:cobble_old5", 
 			description = "Cobblestone Old5", 
 			tiles = {"node_texture_modifier_cobble_old5.png"},
 			},
@@ -65,7 +66,7 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		sounds = minetest.registered_nodes["default:stone"].sounds,
 		not_similar = {
 			{
-			name = "node_texture_modifier:stone_old1", 
+			name = ":node_texture_modifier:stone_old1", 
 			description = "Stone Old1", 
 			tiles = {"node_texture_modifier_stone_old1.png"},
 			drop = "node_texture_modifier:cobble_old1",
@@ -80,17 +81,17 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		place_param2 = minetest.registered_nodes["default:stonebrick"].place_param2,
 		not_similar = {
 			{
-			name = "node_texture_modifier:stonebrick_old1", 
+			name = ":node_texture_modifier:stonebrick_old1", 
 			description = "Stone Brick Old1", 
 			tiles = {"node_texture_modifier_stone_brick_old1.png"},
 			},
 			{
-			name = "node_texture_modifier:stonebrick_old2", 
+			name = ":node_texture_modifier:stonebrick_old2", 
 			description = "Stone Brick Old2", 
 			tiles = {"node_texture_modifier_stone_brick_old2.png"},
 			},
 			{
-			name = "node_texture_modifier:stonebrick_old3", 
+			name = ":node_texture_modifier:stonebrick_old3", 
 			description = "Stone Brick Old3", 
 			tiles = {"node_texture_modifier_stone_brick_old3.png"},
 			},
@@ -102,32 +103,32 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		sounds = minetest.registered_nodes["default:mossycobble"].sounds,
 		not_similar = {
 			{
-			name = "node_texture_modifier:mossycobble_old1", 
+			name = ":node_texture_modifier:mossycobble_old1", 
 			description = "Mossycobble Old1", 
 			tiles = {"node_texture_modifier_mossycobble_old1.png"},
 			},
 			{
-			name = "node_texture_modifier:mossycobble_old2", 
+			name = ":node_texture_modifier:mossycobble_old2", 
 			description = "Mossycobble Old2", 
 			tiles = {"node_texture_modifier_mossycobble_old2.png"},
 			},
 			{
-			name = "node_texture_modifier:mossycobble_old3", 
+			name = ":node_texture_modifier:mossycobble_old3", 
 			description = "Mossycobble Old3", 
 			tiles = {"node_texture_modifier_mossycobble_old3.png"},
 			},
 			{
-			name = "node_texture_modifier:mossycobble_old4", 
+			name = ":node_texture_modifier:mossycobble_old4", 
 			description = "Mossycobble Old4", 
 			tiles = {"node_texture_modifier_mossycobble_old4.png"},
 			},
 			{
-			name = "node_texture_modifier:mossycobble_old5", 
+			name = ":node_texture_modifier:mossycobble_old5", 
 			description = "Mossycobble Old5", 
 			tiles = {"node_texture_modifier_mossycobble_old5.png"},
 			},
 			{
-			name = "node_texture_modifier:mossycobble_old6", 
+			name = ":node_texture_modifier:mossycobble_old6", 
 			description = "Mossycobble Old6", 
 			tiles = {"node_texture_modifier_mossycobble_old6.png"},
 			},
@@ -139,7 +140,7 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		sounds = minetest.registered_nodes["default:desert_stone"].sounds,
 		not_similar = {
 			{
-			name = "node_texture_modifier:desert_stone_old1", 
+			name = ":node_texture_modifier:desert_stone_old1", 
 			description = "Desert Stone Old1", 
 			tiles = {"node_texture_modifier_desert_stone_old1.png"},
 			drop = 'default:desert_cobble',
@@ -154,12 +155,12 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		place_param2 = minetest.registered_nodes["default:desert_stonebrick"].place_param2,
 		not_similar = {
 			{
-			name = "node_texture_modifier:desert_stonebrick_old1", 
+			name = ":node_texture_modifier:desert_stonebrick_old1", 
 			description = "Desert Stone Brick Old1", 
 			tiles = {"node_texture_modifier_desert_stone_brick_old1.png"},
 			},
 			{
-			name = "node_texture_modifier:desert_stonebrick_old2", 
+			name = ":node_texture_modifier:desert_stonebrick_old2", 
 			description = "Desert Stone Brick Old2", 
 			tiles = {"node_texture_modifier_desert_stone_brick_old2.png"},
 			},
@@ -171,7 +172,7 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		sounds = minetest.registered_nodes["default:sandstone"].sounds,
 		not_similar = {
 			{
-			name = "node_texture_modifier:sandstone_old1", 
+			name = ":node_texture_modifier:sandstone_old1", 
 			description = "Sandstone Old1", 
 			tiles = {"node_texture_modifier_sandstone_old1.png"},
 			},
@@ -185,12 +186,12 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		place_param2 = minetest.registered_nodes["default:sandstonebrick"].place_param2,
 		not_similar = {
 			{
-			name = "node_texture_modifier:sandstonebrick_old1", 
+			name = ":node_texture_modifier:sandstonebrick_old1", 
 			description = "Sandstone Brick Old1", 
 			tiles = {"node_texture_modifier_sandstone_brick_old1.png"},
 			},
 			{
-			name = "node_texture_modifier:sandstonebrick_old2", 
+			name = ":node_texture_modifier:sandstonebrick_old2", 
 			description = "Sandstone Brick Old2", 
 			tiles = {"node_texture_modifier_sandstone_brick_old2.png"},
 			},
@@ -204,7 +205,7 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		place_param2 = minetest.registered_nodes["default:obsidianbrick"].place_param2,
 		not_similar = {
 			{
-			name = "node_texture_modifier:obsidianbrick_old1", 
+			name = ":node_texture_modifier:obsidianbrick_old1", 
 			description = "Obsidian Brick Old1", 
 			tiles = {"node_texture_modifier_obsidian_brick_old1.png"},
 			},
@@ -216,27 +217,27 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		sounds = minetest.registered_nodes["default:dirt"].sounds,
 		not_similar = {
 			{
-			name = "node_texture_modifier:dirt_old1", 
+			name = ":node_texture_modifier:dirt_old1", 
 			description = "Dirt Old1", 
 			tiles = {"node_texture_modifier_dirt_old1.png"},
 			},
 			{
-			name = "node_texture_modifier:dirt_old2", 
+			name = ":node_texture_modifier:dirt_old2", 
 			description = "Dirt Old2", 
 			tiles = {"node_texture_modifier_dirt_old2.png"},
 			},
 			{
-			name = "node_texture_modifier:dirt_old3", 
+			name = ":node_texture_modifier:dirt_old3", 
 			description = "Dirt Old3", 
 			tiles = {"node_texture_modifier_dirt_old3.png"},
 			},
 			{
-			name = "node_texture_modifier:dirt_old4", 
+			name = ":node_texture_modifier:dirt_old4", 
 			description = "Dirt Old4", 
 			tiles = {"node_texture_modifier_dirt_old4.png"},
 			},
 			{
-			name = "node_texture_modifier:dirt_old5", 
+			name = ":node_texture_modifier:dirt_old5", 
 			description = "Dirt Old5", 
 			tiles = {"node_texture_modifier_dirt_old5.png"},
 			},
@@ -248,7 +249,7 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		sounds = minetest.registered_nodes["default:dirt_with_grass"].sounds,
 		not_similar = {
 			{
-			name = "node_texture_modifier:dirt_with_grass_old1", 
+			name = ":node_texture_modifier:dirt_with_grass_old1", 
 			description = "Dirt with Grass Old1", 
 			drop = "node_texture_modifier:dirt_old1",
 			tiles = {"node_texture_modifier_grass_old1.png", "node_texture_modifier_dirt_old1.png",
@@ -256,7 +257,7 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 				tileable_vertical = false}},
 			},
 			{
-			name = "node_texture_modifier:dirt_with_grass_old2", 
+			name = ":node_texture_modifier:dirt_with_grass_old2", 
 			description = "Dirt with Grass Old2", 
 			drop = "node_texture_modifier:dirt_old2",
 			tiles = {"node_texture_modifier_grass_old2.png", "node_texture_modifier_dirt_old2.png",
@@ -264,7 +265,7 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 				tileable_vertical = false}},
 			},
 			{
-			name = "node_texture_modifier:dirt_with_grass_old3", 
+			name = ":node_texture_modifier:dirt_with_grass_old3", 
 			description = "Dirt with Grass Old3", 
 			drop = "node_texture_modifier:dirt_old3",
 			tiles = {"node_texture_modifier_grass_old3.png", "node_texture_modifier_dirt_old3.png",
@@ -272,7 +273,7 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 				tileable_vertical = false}},
 			},
 			{
-			name = "node_texture_modifier:dirt_with_grass_old4", 
+			name = ":node_texture_modifier:dirt_with_grass_old4", 
 			description = "Dirt with Grass Old4", 
 			drop = "node_texture_modifier:dirt_old4",
 			tiles = {"node_texture_modifier_grass_old4.png", "node_texture_modifier_dirt_old4.png",
@@ -280,7 +281,7 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 				tileable_vertical = false}},
 			},
 			{
-			name = "node_texture_modifier:dirt_with_grass_old5", 
+			name = ":node_texture_modifier:dirt_with_grass_old5", 
 			description = "Dirt with Grass Old5", 
 			drop = "node_texture_modifier:dirt_old5",
 			tiles = {"node_texture_modifier_grass_old5.png", "node_texture_modifier_dirt_old5.png",
@@ -288,7 +289,7 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 				tileable_vertical = false}},
 			},
 			{
-			name = "node_texture_modifier:dirt_with_grass_old6", 
+			name = ":node_texture_modifier:dirt_with_grass_old6", 
 			description = "Dirt with Grass Old6", 
 			drop = "default:dirt",
 			tiles = {"node_texture_modifier_grass_old6.png", "default_dirt.png",
@@ -297,12 +298,12 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 			},
 		},	
 	})
-	
+
 	for gdnode=1, 6 do
 		minetest.register_abm({
 			label = "Node Texture Modifier Grass covered",
 			nodenames = {
-				"node_texture_modifier:dirt_with_grass_old"..gdnode,
+				":node_texture_modifier:dirt_with_grass_old"..gdnode,
 			},
 			interval = 8,
 			chance = 50,
@@ -317,7 +318,7 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 					if gdnode == 6 then
 						minetest.set_node(pos, {name = "default:dirt"})
 					else
-						minetest.set_node(pos, {name = "node_texture_modifier:dirt_old"..gdnode})
+						minetest.set_node(pos, {name = ":node_texture_modifier:dirt_old"..gdnode})
 					end
 				end
 			end
@@ -325,14 +326,14 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		if gdnode==6 then break end
 		minetest.register_abm({
 			label = "Node Texture Modifier Grass spread",
-			nodenames = {"node_texture_modifier:dirt_old"..gdnode},
+			nodenames = {":node_texture_modifier:dirt_old"..gdnode},
 			neighbors = {
-				"node_texture_modifier:dirt_with_grass_old1",
-				"node_texture_modifier:dirt_with_grass_old2",
-				"node_texture_modifier:dirt_with_grass_old3",
-				"node_texture_modifier:dirt_with_grass_old4",
-				"node_texture_modifier:dirt_with_grass_old5",
-				"node_texture_modifier:dirt_with_grass_old6",
+				":node_texture_modifier:dirt_with_grass_old1",
+				":node_texture_modifier:dirt_with_grass_old2",
+				":node_texture_modifier:dirt_with_grass_old3",
+				":node_texture_modifier:dirt_with_grass_old4",
+				":node_texture_modifier:dirt_with_grass_old5",
+				":node_texture_modifier:dirt_with_grass_old6",
 				"default:dirt_with_grass",
 				"default:dirt_with_dry_grass",
 				"default:dirt_with_snow",
@@ -348,19 +349,19 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 				if (minetest.get_node_light(above) or 0) < 13 then
 					return
 				end
-				local p2 = minetest.find_node_near(pos, 1, {"node_texture_modifier:dirt_with_grass_old1",
-				"node_texture_modifier:dirt_with_grass_old2",
-				"node_texture_modifier:dirt_with_grass_old3",
-				"node_texture_modifier:dirt_with_grass_old4",
-				"node_texture_modifier:dirt_with_grass_old5",
-				"node_texture_modifier:dirt_with_grass_old6",
+				local p2 = minetest.find_node_near(pos, 1, {":node_texture_modifier:dirt_with_grass_old1",
+				":node_texture_modifier:dirt_with_grass_old2",
+				":node_texture_modifier:dirt_with_grass_old3",
+				":node_texture_modifier:dirt_with_grass_old4",
+				":node_texture_modifier:dirt_with_grass_old5",
+				":node_texture_modifier:dirt_with_grass_old6",
 				"default:dirt_with_grass",
 				"default:dirt_with_dry_grass",
 				"default:dirt_with_snow"})
 				if p2 then
 					local n2 = minetest.get_node(above)
 					if n2 and n2.name == "air" then
-						minetest.set_node(pos, {name = "node_texture_modifier:dirt_with_grass_old"..gdnode})
+						minetest.set_node(pos, {name = ":node_texture_modifier:dirt_with_grass_old"..gdnode})
 						return
 					end
 				end
@@ -370,29 +371,29 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 				end
 				local name = n2.name
 				if minetest.get_item_group(name, "grass") ~= 0 then
-					minetest.set_node(pos, {name = "node_texture_modifier:dirt_old"..gdnode})
+					minetest.set_node(pos, {name = ":node_texture_modifier:dirt_old"..gdnode})
 				end
 			end
 		})
 	end
-	
+
 	register_similar_nodes({
 		node_type = "sand", 
 		groups = minetest.registered_nodes["default:sand"].groups,
 		sounds = minetest.registered_nodes["default:sand"].sounds,
 		not_similar = {
 			{
-			name = "node_texture_modifier:sand_old1", 
+			name = ":node_texture_modifier:sand_old1", 
 			description = "Sand Old1", 
 			tiles = {"node_texture_modifier_sand_old1.png"},
 			},
 			{
-			name = "node_texture_modifier:sand_old2", 
+			name = ":node_texture_modifier:sand_old2", 
 			description = "Sand Old2", 
 			tiles = {"node_texture_modifier_sand_old2.png"},
 			},
 			{
-			name = "node_texture_modifier:sand_old3", 
+			name = ":node_texture_modifier:sand_old3", 
 			description = "Sand Old3", 
 			tiles = {"node_texture_modifier_sand_old3.png"},
 			},
@@ -404,7 +405,7 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		sounds = minetest.registered_nodes["default:desert_sand"].sounds,
 		not_similar = {
 			{
-			name = "node_texture_modifier:sand_old1", 
+			name = ":node_texture_modifier:sand_old1", 
 			description = "Desert Sand Old1", 
 			tiles = {"node_texture_modifier_desert_sand_old1.png"},
 			},
@@ -417,12 +418,12 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		drop = minetest.registered_nodes["default:gravel"].drop,
 		not_similar = {
 			{
-			name = "node_texture_modifier:gravel_old1", 
+			name = ":node_texture_modifier:gravel_old1", 
 			description = "Gravel Old1", 
 			tiles = {"node_texture_modifier_gravel_old1.png"},
 			},
 			{
-			name = "node_texture_modifier:gravel_old2", 
+			name = ":node_texture_modifier:gravel_old2", 
 			description = "Gravel Old2", 
 			tiles = {"node_texture_modifier_gravel_old2.png"},
 			},
@@ -435,7 +436,7 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		paramtype = minetest.registered_nodes["default:ice"].paramtype,
 		not_similar = {
 			{
-			name = "node_texture_modifier:ice_old1", 
+			name = ":node_texture_modifier:ice_old1", 
 			description = "Ice Old1", 
 			tiles = {"node_texture_modifier_ice_old1.png"},
 			},
@@ -449,7 +450,7 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		on_place = minetest.registered_nodes["default:tree"].on_place,
 		not_similar = {
 			{
-			name = "node_texture_modifier:tree_old1", 
+			name = ":node_texture_modifier:tree_old1", 
 			description = "Tree Old1", 
 			tiles = {"node_texture_modifier_tree_top_old1.png",
 				"node_texture_modifier_tree_top_old1.png", 
@@ -465,12 +466,12 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		place_param2 = minetest.registered_nodes["default:wood"].place_param2,
 		not_similar = {
 			{
-			name = "node_texture_modifier:wood_old1", 
+			name = ":node_texture_modifier:wood_old1", 
 			description = "Wooden Planks Old1", 
 			tiles = {"node_texture_modifier_wood_old1.png"},
 			},
 			{
-			name = "node_texture_modifier:wood_old2", 
+			name = ":node_texture_modifier:wood_old2", 
 			description = "Wooden Planks Old2", 
 			tiles = {"node_texture_modifier_wood_old2.png"},
 			},
@@ -488,7 +489,7 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		after_place_node = minetest.registered_nodes["default:leaves"].after_place_node,
 		not_similar = {
 			{
-			name = "node_texture_modifier:leaves_old1", 
+			name = ":node_texture_modifier:leaves_old1", 
 			description = "Leaves Old1", 
 			tiles = {"node_texture_modifier_leaves_old1.png"},
 			},
@@ -507,7 +508,7 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		on_use = minetest.registered_nodes["default:apple"].on_use,
 		not_similar = {
 			{
-			name = "node_texture_modifier:apple_old1", 
+			name = ":node_texture_modifier:apple_old1", 
 			description = "Apple Old1", 
 			tiles = {"node_texture_modifier_apple_old1.png"},
 			inventory_image = "node_texture_modifier_apple_old1.png",
@@ -522,25 +523,25 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		on_place = minetest.registered_nodes["default:jungletree"].on_place,
 		not_similar = {
 			{
-			name = "node_texture_modifier:jungletree_old1", 
+			name = ":node_texture_modifier:jungletree_old1", 
 			description = "Jungle Tree Old1", 
 			tiles = {"node_texture_modifier_jungletree_top_old1.png",
 				"node_texture_modifier_jungletree_top_old1.png", 
 				"node_texture_modifier_jungletree_old1.png"},
 			},{
-			name = "node_texture_modifier:jungletree_old2", 
+			name = ":node_texture_modifier:jungletree_old2", 
 			description = "Jungle Tree Old2", 
 			tiles = {"node_texture_modifier_jungletree_top_old2.png",
 				"node_texture_modifier_jungletree_top_old2.png", 
 				"node_texture_modifier_jungletree_old2.png"},
 			},{
-			name = "node_texture_modifier:jungletree_old3", 
+			name = ":node_texture_modifier:jungletree_old3", 
 			description = "Jungle Tree Old3", 
 			tiles = {"node_texture_modifier_jungletree_top_old3.png",
 				"node_texture_modifier_jungletree_top_old3.png", 
 				"default_jungletree.png"},
 			},{
-			name = "node_texture_modifier:jungletree_old4", 
+			name = ":node_texture_modifier:jungletree_old4", 
 			description = "Jungle Tree Old4", 
 			tiles = {"node_texture_modifier_jungletree_top_old4.png",
 				"node_texture_modifier_jungletree_top_old4.png", 
@@ -556,12 +557,12 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		place_param2 = minetest.registered_nodes["default:junglewood"].place_param2,
 		not_similar = {
 			{
-			name = "node_texture_modifier:junglewood_old1", 
+			name = ":node_texture_modifier:junglewood_old1", 
 			description = "Junglewood Planks Old1", 
 			tiles = {"node_texture_modifier_junglewood_old1.png"},
 			},
 			{
-			name = "node_texture_modifier:junglewood_old2", 
+			name = ":node_texture_modifier:junglewood_old2", 
 			description = "Junglewood Planks Old2", 
 			tiles = {"node_texture_modifier_junglewood_old2.png"},
 			},
@@ -573,17 +574,17 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		sounds = minetest.registered_nodes["default:steelblock"].sounds,
 		not_similar = {
 			{
-			name = "node_texture_modifier:steelblock_old1", 
+			name = ":node_texture_modifier:steelblock_old1", 
 			description = "Steel Block Old1", 
 			tiles = {"node_texture_modifier_steel_block_old1.png"},
 			},
 			{
-			name = "node_texture_modifier:steelblock_old2", 
+			name = ":node_texture_modifier:steelblock_old2", 
 			description = "Steel Block Old2", 
 			tiles = {"node_texture_modifier_steel_block_old2.png"},
 			},
 			{
-			name = "node_texture_modifier:steelblock_old3", 
+			name = ":node_texture_modifier:steelblock_old3", 
 			description = "Steel Block Old3", 
 			tiles = {"node_texture_modifier_steel_block_old3.png"},
 			},
@@ -595,12 +596,12 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		sounds = minetest.registered_nodes["default:copperblock"].sounds,
 		not_similar = {
 			{
-			name = "node_texture_modifier:copperblock_old1", 
+			name = ":node_texture_modifier:copperblock_old1", 
 			description = "Copper Block Old1", 
 			tiles = {"node_texture_modifier_copper_block_old1.png"},
 			},
 			{
-			name = "node_texture_modifier:copperblock_old2", 
+			name = ":node_texture_modifier:copperblock_old2", 
 			description = "Copper Block Old2", 
 			tiles = {"node_texture_modifier_copper_block_old2.png"},
 			},
@@ -612,12 +613,12 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		sounds = minetest.registered_nodes["default:bronzeblock"].sounds,
 		not_similar = {
 			{
-			name = "node_texture_modifier:bronzeblock_old1", 
+			name = ":node_texture_modifier:bronzeblock_old1", 
 			description = "Bronze Block Old1", 
 			tiles = {"node_texture_modifier_bronze_block_old1.png"},
 			},
 			{
-			name = "node_texture_modifier:bronzeblock_old2", 
+			name = ":node_texture_modifier:bronzeblock_old2", 
 			description = "Bronze Block Old2", 
 			tiles = {"node_texture_modifier_bronze_block_old2.png"},
 			},
@@ -629,12 +630,12 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		sounds = minetest.registered_nodes["default:mese"].sounds,
 		not_similar = {
 			{
-			name = "node_texture_modifier:mese_old1", 
+			name = ":node_texture_modifier:mese_old1", 
 			description = "Mese Old1", 
 			tiles = {"node_texture_modifier_mese_old1.png"},
 			},
 			{
-			name = "node_texture_modifier:mese_old2", 
+			name = ":node_texture_modifier:mese_old2", 
 			description = "Mese Old2", 
 			tiles = {"node_texture_modifier_mese_old2.png"},
 			},
@@ -646,7 +647,7 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		sounds = minetest.registered_nodes["default:mese"].sounds,
 		not_similar = {
 			{
-			name = "node_texture_modifier:mese_old3", 
+			name = ":node_texture_modifier:mese_old3", 
 			description = "Mese Block Old1", 
 			tiles = {"node_texture_modifier_mese_block_old1.png"},
 			},
@@ -658,17 +659,17 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		sounds = minetest.registered_nodes["default:goldblock"].sounds,
 		not_similar = {
 			{
-			name = "node_texture_modifier:goldblock_old1", 
+			name = ":node_texture_modifier:goldblock_old1", 
 			description = "Gold Block Old1", 
 			tiles = {"node_texture_modifier_gold_block_old1.png"},
 			},
 			{
-			name = "node_texture_modifier:goldblock_old2", 
+			name = ":node_texture_modifier:goldblock_old2", 
 			description = "Gold Block Old2", 
 			tiles = {"node_texture_modifier_gold_block_old2.png"},
 			},
 			{
-			name = "node_texture_modifier:goldblock_old3", 
+			name = ":node_texture_modifier:goldblock_old3", 
 			description = "Gold Block Old3", 
 			tiles = {"node_texture_modifier_gold_block_old3.png"},
 			},
@@ -680,17 +681,17 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		sounds = minetest.registered_nodes["default:diamondblock"].sounds,
 		not_similar = {
 			{
-			name = "node_texture_modifier:diamondblock_old1", 
+			name = ":node_texture_modifier:diamondblock_old1", 
 			description = "Diamond Block Old1", 
 			tiles = {"node_texture_modifier_diamond_block_old1.png"},
 			},
 			{
-			name = "node_texture_modifier:diamondblock_old2", 
+			name = ":node_texture_modifier:diamondblock_old2", 
 			description = "Diamond Block Old2", 
 			tiles = {"node_texture_modifier_diamond_block_old2.png"},
 			},
 			{
-			name = "node_texture_modifier:diamondblock_old3", 
+			name = ":node_texture_modifier:diamondblock_old3", 
 			description = "Diamond Block Old3", 
 			tiles = {"node_texture_modifier_diamond_block_old3.png"},
 			},
@@ -704,7 +705,7 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		on_place = minetest.registered_nodes["default:cactus"].on_place,
 		not_similar = {
 			{
-			name = "node_texture_modifier:cactus_old1", 
+			name = ":node_texture_modifier:cactus_old1", 
 			description = "Cactus Old1", 
 			tiles = {"node_texture_modifier_cactus_top_old1.png",
 				"node_texture_modifier_cactus_top_old1.png", 
@@ -723,7 +724,7 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		selection_box = minetest.registered_nodes["default:papyrus"].selection_box,
 		not_similar = {
 			{
-			name = "node_texture_modifier:papyrus_old1", 
+			name = ":node_texture_modifier:papyrus_old1", 
 			description = "Papyrus Old1", 
 			tiles = {"node_texture_modifier_papyrus_old1.png"},
 			inventory_image = "node_texture_modifier_papyrus_old1.png",
@@ -739,7 +740,7 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		place_param2 = minetest.registered_nodes["default:brick"].place_param2,
 		not_similar = {
 			{
-			name = "node_texture_modifier:brick_old1", 
+			name = ":node_texture_modifier:brick_old1", 
 			description = "Brick Old1", 
 			tiles = {"node_texture_modifier_brick_old1.png"},
 			},
@@ -753,7 +754,7 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		place_param2 = 0,
 		not_similar = {
 			{
-			name = "node_texture_modifier:bookshelf_old1", 
+			name = ":node_texture_modifier:bookshelf_old1", 
 			description = "Bookshelf Old1", 
 			tiles = {"node_texture_modifier_wood_old2.png", "node_texture_modifier_wood_old2.png",
 				"node_texture_modifier_bookshelf_old1.png"},
@@ -769,14 +770,14 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		sounds = minetest.registered_nodes["default:chest"].sounds,
 		not_similar = {
 			{
-			name = "node_texture_modifier:chest_old1", 
+			name = ":node_texture_modifier:chest_old1", 
 			description = "Chest Old1", 
 			tiles = {"node_texture_modifier_chest_top_old1.png", "node_texture_modifier_chest_top_old1.png",
 			 "node_texture_modifier_chest_side_old1.png", "node_texture_modifier_chest_side_old1.png", 
 			 "node_texture_modifier_chest_side_old1.png", "node_texture_modifier_chest_front_old1.png"},
 			},
 			{
-			name = "node_texture_modifier:chest_old2", 
+			name = ":node_texture_modifier:chest_old2", 
 			description = "Chest Old2", 
 			tiles = {"node_texture_modifier_chest_top_old2.png", "node_texture_modifier_chest_top_old2.png",
 			 "node_texture_modifier_chest_side_old2.png", "node_texture_modifier_chest_side_old2.png", 
@@ -792,14 +793,14 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		sounds = minetest.registered_nodes["default:chest_locked"].sounds,
 		not_similar = {
 			{
-			name = "node_texture_modifier:chest_locked_old1", 
+			name = ":node_texture_modifier:chest_locked_old1", 
 			description = "Locked Chest Old1", 
 			tiles = {"node_texture_modifier_chest_top_old1.png", "node_texture_modifier_chest_top_old1.png",
 			 "node_texture_modifier_chest_side_old1.png", "node_texture_modifier_chest_side_old1.png", 
 			 "node_texture_modifier_chest_side_old1.png", "node_texture_modifier_chest_lock_old1.png"},
 			},
 			{
-			name = "node_texture_modifier:chest_locked_old2", 
+			name = ":node_texture_modifier:chest_locked_old2", 
 			description = "Locked Chest Old2", 
 			tiles = {"node_texture_modifier_chest_top_old2.png", "node_texture_modifier_chest_top_old2.png",
 			 "node_texture_modifier_chest_side_old2.png", "node_texture_modifier_chest_side_old2.png", 
@@ -815,35 +816,35 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 		sounds = minetest.registered_nodes["default:furnace"].sounds,
 		not_similar = {
 			{
-			name = "node_texture_modifier:furnace_old1", 
+			name = ":node_texture_modifier:furnace_old1", 
 			description = "Furnace Old1", 
 			tiles = {"node_texture_modifier_furnace_side_old1.png", "node_texture_modifier_furnace_side_old1.png",
 			 "node_texture_modifier_furnace_side_old1.png", "node_texture_modifier_furnace_side_old1.png", 
 			 "node_texture_modifier_furnace_side_old1.png", "node_texture_modifier_furnace_front_old1.png"},
 			},
 			{
-			name = "node_texture_modifier:furnace_old2", 
+			name = ":node_texture_modifier:furnace_old2", 
 			description = "Furnace Old2", 
 			tiles = {"node_texture_modifier_furnace_top_old1.png", "node_texture_modifier_furnace_bottom_old1.png",
 			 "node_texture_modifier_furnace_side_old2.png", "node_texture_modifier_furnace_side_old2.png", 
 			 "node_texture_modifier_furnace_side_old2.png", "node_texture_modifier_furnace_front_old2.png"},
 			},
 			{
-			name = "node_texture_modifier:furnace_active_old1", 
+			name = ":node_texture_modifier:furnace_active_old1", 
 			description = "Furnace Active Old1", 
 			tiles = {"node_texture_modifier_furnace_side_old1.png", "node_texture_modifier_furnace_side_old1.png",
 			 "node_texture_modifier_furnace_side_old1.png", "node_texture_modifier_furnace_side_old1.png", 
 			 "node_texture_modifier_furnace_side_old1.png", "node_texture_modifier_furnace_front_active_old1.png"},
 			},
 			{
-			name = "node_texture_modifier:furnace_active_old2_1", 
+			name = ":node_texture_modifier:furnace_active_old2_1", 
 			description = "Furnace Active Old2 1", 
 			tiles = {"node_texture_modifier_furnace_top_old1.png", "node_texture_modifier_furnace_bottom_old1.png",
 			 "node_texture_modifier_furnace_side_old2.png", "node_texture_modifier_furnace_side_old2.png", 
 			 "node_texture_modifier_furnace_side_old2.png", "node_texture_modifier_furnace_front_active_old2.png"},
 			},
 			{
-			name = "node_texture_modifier:furnace_active_old2_2", 
+			name = ":node_texture_modifier:furnace_active_old2_2", 
 			description = "Furnace Active Old2 2", 
 			tiles = {"node_texture_modifier_furnace_top_old1.png", "node_texture_modifier_furnace_bottom_old1.png",
 			 "node_texture_modifier_furnace_side_old2.png", "node_texture_modifier_furnace_side_old2.png", 
@@ -858,6 +859,29 @@ if minetest.setting_get("node_texture_modifier_old_nodes")=="true" or
 						length = 1.5
 					},
 				}},
+			},
+		},	
+	})
+end
+
+if minetest.get_modpath("bones") then
+	register_similar_nodes({
+		node_type = "bones", 
+		groups = minetest.registered_nodes["bones:bones"].groups,
+		sounds = minetest.registered_nodes["bones:bones"].sounds,
+		paramtype2 = minetest.registered_nodes["bones:bones"].paramtype2,
+		not_similar = {
+			{
+			name = ":node_texture_modifier:bones_old1", 
+			description = "Bones Old1", 
+			tiles = {
+				"node_texture_modifier_bones_top_old1.png^[transform2",
+				"node_texture_modifier_bones_bottom_old1.png",
+				"node_texture_modifier_bones_side_old1.png",
+				"node_texture_modifier_bones_side_old1.png",
+				"node_texture_modifier_bones_rear_old1.png",
+				"node_texture_modifier_bones_front_old1.png"
+			},
 			},
 		},	
 	})
