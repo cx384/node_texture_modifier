@@ -1,5 +1,6 @@
 node_texture_modifier
 moreblocks?
+moreores?
 darkage?
 mining_plus?
 itemframes?

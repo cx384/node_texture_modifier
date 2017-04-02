@@ -1,0 +1,17 @@
+# 
+#ignores activated texture packs if true
+#
+#(Maybe this does not work)
+#
+ntm_texture_packs_activate_all_texture_packs (Activate all texture packs) bool true
+
+# 
+# Example: 
+#PixelBOX, dogview, mytextures5
+#
+#
+ntm_texture_packs_activated_texture_packs (Activated texture packs) string 
+
+ntm_texture_packs_show_nodes_in_creative_inventory (Show nodes in the creative inventory) bool false
+
+ntm_texture_packs_copy_textures (Copy textures) bool true

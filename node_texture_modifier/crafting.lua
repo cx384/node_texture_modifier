@@ -43,12 +43,14 @@ minetest.register_craft({
 	recipe = {"node_texture_modifier:dye_mixture", "group:dye", "node_texture_modifier:dye_mixture"},
 })
 
-for _, dye in ipairs(dye.dyes) do
-	minetest.register_craft({
-		type = "shapeless",
-		output = "dye:"..dye[1].." 2",
-		recipe = {"dye:"..dye[1], "node_texture_modifier:dye_mixture"},
-	})
+if minetest.setting_get("node_texture_modifier_disable_dyeing") ~= "true" then
+	for _, dye in ipairs(dye.dyes) do
+		minetest.register_craft({
+			type = "shapeless",
+			output = "dye:"..dye[1].." 2",
+			recipe = {"dye:"..dye[1], "node_texture_modifier:dye_mixture"},
+		})
+	end
 end
 
 

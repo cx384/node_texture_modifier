@@ -3,7 +3,11 @@ local function add_nodes_type_from_table(t)
 		local node_type = row[1]
 		local nodes = row[2]
 		for _, node in pairs(nodes) do
-			node_texture_modifier.add_node_too_type(node, node_type)
+			if node_type == "none" then
+				node_texture_modifier.add_node_too_type(node, node)
+			else
+				node_texture_modifier.add_node_too_type(node, node_type)
+			end
 		end
 	end
 end
@@ -13,13 +17,17 @@ local function add_dyed_nodes_type_from_table(t)
 		local dyed_node_type = row[1]
 		local nodes = row[2]
 		for _, node in pairs(nodes) do
-			node_texture_modifier.add_dyed_node_too_type(node, dyed_node_type)
+			if dyed_node_type == "none" then
+				node_texture_modifier.add_dyed_node_too_type(node, node)
+			else
+				node_texture_modifier.add_dyed_node_too_type(node, dyed_node_type)
+			end
 		end
 	end
 end
 
 if minetest.get_modpath("default") then
-	local default_nodes = {
+	node_texture_modifier.registrations.default = {
 		{"stone", 				{"default:stone", "default:stone_block", "default:stonebrick"}},
 		{"cobble", 				{"default:cobble"}},
 		{"mossycobble", 		{"default:mossycobble"}},
@@ -27,10 +35,14 @@ if minetest.get_modpath("default") then
 		{"desert_cobble", 		{"default:desert_cobble"}},
 		{"obsidian", 			{"default:obsidian", "default:obsidian_block",  "default:obsidianbrick"}},
 		{"sandstone", 			{"default:sandstone", "default:sandstone_block", "default:sandstonebrick"}},
+		{"desert_sandstone", 			{"default:desert_sandstone", 
+			"default:desert_sandstone_block", "default:desert_sandstone_brick"}},
+		{"silver_sandstone", 			{"default:silver_sandstone", 
+			"default:silver_sandstone_block", "default:silver_sandstone_brick"}},
 		{"dirt", 				{"default:dirt"}},
-		{"dirt_with_grass", 	{"default:dirt_with_grass"}},
-		{"dirt_with_dry_grass", {"default:dirt_with_dry_grass"}},
-		{"dirt_with_snow", 		{"default:dirt_with_snow"}},
+		{"dirt_with_grass", 	{"default:dirt_with_grass"}, {"unavailable"}},
+		{"dirt_with_dry_grass", {"default:dirt_with_dry_grass"}, {"unavailable"}},
+		{"dirt_with_snow", 		{"default:dirt_with_snow"}, {"unavailable"}},
 		{"sand", 				{"default:sand"}},
 		{"desert_sand", 		{"default:desert_sand"}},
 		{"gravel", 				{"default:gravel"}},
@@ -58,25 +70,25 @@ if minetest.get_modpath("default") then
 		{"papyrus", 			{"default:papyrus"}},
 		{"dry_shrub", 			{"default:dry_shrub"}},
 		{"junglegrass", 		{"default:junglegrass"}},
-		{"torch", 				{"default:torch"}},
+		{"torch", 				{"default:torch"}, {"2dtorch"}},
 		{"chest", 				{"default:chest"}},
 		{"chest_locked", 		{"default:chest_locked"}},
 		{"bookshelf", 			{"default:bookshelf"}},
-		{"fence_wood", 			{"default:fence_wood"}},
-		{"fence_acacia_wood", 	{"default:fence_acacia_wood"}},
-		{"fence_junglewood", 	{"default:fence_junglewood"}},
-		{"fence_pine_wood", 	{"default:fence_pine_wood"}},
-		{"fence_aspen_wood", 	{"default:fence_aspen_wood"}},
+		{"fence_wood", 			{"default:fence_wood"}, {"fence"}},
+		{"fence_acacia_wood", 	{"default:fence_acacia_wood"}, {"fence"}},
+		{"fence_junglewood", 	{"default:fence_junglewood"}, {"fence"}},
+		{"fence_pine_wood", 	{"default:fence_pine_wood"}, {"fence"}},
+		{"fence_aspen_wood", 	{"default:fence_aspen_wood"}, {"fence"}},
 		{"glass", 				{"default:glass"}},
 		{"obsidian_glass", 		{"default:obsidian_glass"}},
 		{"brick", 				{"default:brick"}},
 		{"meselamp", 			{"default:meselamp"}},
 		{"cloud", 				{"default:cloud"}},
-		{"apple", 				{"default:apple"}},
+		{"apple", 				{"default:apple"}, {deleteentrys={"after_place_node"}}},
 		{"leaves", 				{"default:leaves"}},
-		{"furnace", 			{"default:furnace_active", "default:furnace"}},
-		{"grass", 				{"default:grass_1"}},
-		{"dry_grass", 			{"default:dry_grass_1"}},
+		{"furnace", 			{"default:furnace_active", "default:furnace"}, {deleteentrys={"can_dig", "on_timer", "on_construct", "on_blast"}}},
+		{"grass", 				{"default:grass_1"}, {deleteentrys={"on_place"}}},
+		{"dry_grass", 			{"default:dry_grass_1"}, {deleteentrys={"on_place"}}},
 		{"coral_brown", 		{"default:coral_brown"}},
 		{"coral_orange", 		{"default:coral_orange"}},
 		{"coral_skeleton", 		{"default:coral_skeleton"}},
@@ -88,113 +100,135 @@ if minetest.get_modpath("default") then
 		{"acacia_bush_leaves", 	{"default:acacia_bush_leaves"}},
 		{"acacia_bush_stem", 	{"default:acacia_bush_stem"}},
 		{"bush_stem", 			{"default:bush_stem"}},
-		{"sapling", 			{"default:sapling"}},
-		{"junglesapling", 		{"default:junglesapling"}},
-		{"pine_sapling", 		{"default:pine_sapling"}},
-		{"acacia_sapling", 		{"default:acacia_sapling"}},
-		{"aspen_sapling", 		{"default:aspen_sapling"}},
+		{"sapling", 			{"default:sapling"}, {deleteentrys={"on_timer", "on_construct", "on_place"}}},
+		{"junglesapling", 		{"default:junglesapling"}, {deleteentrys={"on_timer", "on_construct", "on_place"}}},
+		{"pine_sapling", 		{"default:pine_sapling"}, {deleteentrys={"on_timer", "on_construct", "on_place"}}},
+		{"acacia_sapling", 		{"default:acacia_sapling"}, {deleteentrys={"on_timer", "on_construct", "on_place"}}},
+		{"aspen_sapling", 		{"default:aspen_sapling"}, {deleteentrys={"on_timer", "on_construct", "on_place"}}},
 		{"wood_ladder", 		{"default:ladder_wood"}},
 		{"steel_ladder", 		{"default:ladder_steel"}},
 		{"wood_sign", 			{"default:sign_wall_wood"}},
 		{"steel_sign", 			{"default:sign_wall_steel"}},
 		{"silver_sand", 		{"default:silver_sand"}},
+		{"none", 		{"default:stone_with_coal", "default:stone_with_iron", 
+			"default:stone_with_copper", "default:stone_with_mese", "default:stone_with_gold", 
+			"default:stone_with_diamond"}, {"unavailable"}},
+
 	}
-	add_nodes_type_from_table(default_nodes)
+	add_nodes_type_from_table(node_texture_modifier.registrations.default)
 end
 
 if minetest.get_modpath("wool") then
-	for _, dye in ipairs(dye.dyes) do
-		node_texture_modifier.add_dyed_node_too_type("wool:"..dye[1], "wool")
+	node_texture_modifier.dyed_registrations.wool = {}
+	for k, dye in ipairs(dye.dyes) do
+		node_texture_modifier.dyed_registrations.wool[k] = {"wool", {"wool:"..dye[1]}}
 	end
+	add_dyed_nodes_type_from_table(node_texture_modifier.dyed_registrations.wool)
+	node_texture_modifier.registrations.wool = {}
+	for k, dye in ipairs(dye.dyes) do
+		node_texture_modifier.registrations.wool[k] = {dye[1].."_".."wool", {"wool:"..dye[1]}}
+	end
+	add_nodes_type_from_table(node_texture_modifier.registrations.wool)
 end
 
 if minetest.get_modpath("doors") then
-	local doors = {
-		{"wood_door", 				{"doors:door_wood"}},
-		{"steel_door", 				{"doors:door_steel"}},
-		{"glass_door", 				{"doors:door_glass"}},
-		{"obsidian_glass_door",		{"doors:door_obsidian_glass"}},
-		{"wood_trapdoor", 			{"doors:trapdoor"}},
-		{"steel_trapdoor", 			{"doors:trapdoor_steel"}},
-		{"gate_wood", 				{"doors:gate_wood_closed"}},
-		{"fence_gate_acacia_wood", 	{"doors:gate_acacia_wood_closed"}},
-		{"fence_gate_junglewood", 	{"doors:gate_junglewood_closed"}},
-		{"fence_gate_pine_wood", 	{"doors:gate_pine_wood_closed"}},
-		{"fence_gate_aspen_wood", 	{"doors:gate_aspen_wood_closed"}},
+	node_texture_modifier.registrations.doors = {
+		{"wood_door", 				{"doors:door_wood"}, {"door"}},
+		{"steel_door", 				{"doors:door_steel"}, {"door"}},
+		{"glass_door", 				{"doors:door_glass"}, {"door"}},
+		{"obsidian_glass_door",		{"doors:door_obsidian_glass"}, {"door"}},
+		{"wood_trapdoor", 			{"doors:trapdoor"}, {"trapdoor"}},
+		{"steel_trapdoor", 			{"doors:trapdoor_steel"}, {"trapdoor"}},
+		{"gate_wood", 				{"doors:gate_wood_closed"}, {"fencegate"}},
+		{"fence_gate_acacia_wood", 	{"doors:gate_acacia_wood_closed"}, {"fencegate"}},
+		{"fence_gate_junglewood", 	{"doors:gate_junglewood_closed"}, {"fencegate"}},
+		{"fence_gate_pine_wood", 	{"doors:gate_pine_wood_closed"}, {"fencegate"}},
+		{"fence_gate_aspen_wood", 	{"doors:gate_aspen_wood_closed"}, {"fencegate"}},
 	}
-	add_nodes_type_from_table(doors)
+	add_nodes_type_from_table(node_texture_modifier.registrations.doors)
 end
 
 if minetest.get_modpath("farming") then
-	local farming_nodes = {
+	node_texture_modifier.registrations.farming = {
 		{"straw", 				{"farming:straw"}},
 	}
-	add_nodes_type_from_table(farming_nodes)
+	add_nodes_type_from_table(node_texture_modifier.registrations.farming)
 end
 
 if minetest.get_modpath("bones") then
-	local bones_nodes = {
+	node_texture_modifier.registrations.bones = {
 		{"bones", 				{"bones:bones"}},
 	}
-	add_nodes_type_from_table(bones_nodes)
+	add_nodes_type_from_table(node_texture_modifier.registrations.bones)
 end
 
 if minetest.get_modpath("boats") then
-	local boats = {
-		{"boat", 				{"boats:boat"}},
+	node_texture_modifier.registrations.boats = {
+		{"boat", 				{"boats:boat"}, {"complex"}},
 	}
-	add_nodes_type_from_table(boats)
+	add_nodes_type_from_table(node_texture_modifier.registrations.boats)
 end
 
 if minetest.get_modpath("beds") then
-	local beds = {
-		{"fancy_bed", 			{"beds:fancy_bed_bottom"}},
-		{"bed", 				{"beds:bed_bottom"}},
+	node_texture_modifier.registrations.beds = {
+		{"fancy_bed", 			{"beds:fancy_bed_bottom"}, {"complex"}},
+		{"bed", 				{"beds:bed_bottom"}, {"complex"}},
 	}
-	add_nodes_type_from_table(beds)
+	add_nodes_type_from_table(node_texture_modifier.registrations.beds)
 end
 
 if minetest.get_modpath("nyancat") then
-	local nyancat_nodes = {
+	node_texture_modifier.registrations.nyancat = {
 		{"nyancat_rainbow", 	{"nyancat:nyancat_rainbow"}},
 		{"nyancat", 			{"nyancat:nyancat"}},
 	}
-	add_nodes_type_from_table(nyancat_nodes)
+	add_nodes_type_from_table(node_texture_modifier.registrations.nyancat)
 end
 
 if minetest.get_modpath("tnt") then
-	local tnt_nodes = {
+	node_texture_modifier.registrations.tnt = {
 		{"tnt", 				{"tnt:tnt"}},
 	}
-	add_nodes_type_from_table(tnt_nodes)
+	add_nodes_type_from_table(node_texture_modifier.registrations.tnt)
 end
 
 if minetest.get_modpath("vessels") then
-	local vessels_nodes = {
+	node_texture_modifier.registrations.vessels = {
 		{"vessels_shelf", 				{"vessels:shelf"}},
 		{"glass_bottle", 				{"vessels:glass_bottle"}},
 		{"drinking_glass", 				{"vessels:drinking_glass"}},
 		{"steel_bottle", 				{"vessels:steel_bottle"}},
 	}
-	add_nodes_type_from_table(vessels_nodes)
+	add_nodes_type_from_table(node_texture_modifier.registrations.vessels)
 end
 
 if minetest.get_modpath("walls") then
-	local walls = {
+	node_texture_modifier.registrations.walls = {
 		{"cobble_wall", 				{"walls:cobble"}},
 		{"mossycobble_wall", 			{"walls:mossycobble"}},
 		{"desertcobble_wall", 			{"walls:desertcobble"}},
 	}
-	add_nodes_type_from_table(walls)
+	add_nodes_type_from_table(node_texture_modifier.registrations.walls)
 end
 
 if minetest.get_modpath("xpanes") then
-	local xpanes = {
-		{"glass_pane", 					{"xpanes:pane_flat"}},
-		{"iron_bar", 					{"xpanes:bar_flat"}},
+	node_texture_modifier.registrations.xpanes = {
+		{"glass_pane", 					{"xpanes:pane_flat"}, {"pane"}},
+		{"iron_bar", 					{"xpanes:bar_flat"}, {"pane"}},
 	}
-	add_nodes_type_from_table(xpanes)
+	add_nodes_type_from_table(node_texture_modifier.registrations.xpanes)
 end
+
+if minetest.get_modpath("flowers") then
+	node_texture_modifier.registrations.flowers = {
+		{"none", 					{"flowers:rose", "flowers:tulip", "flowers:dandelion_yellow",
+			"flowers:geranium", "flowers:viola", "flowers:dandelion_white",  
+			"flowers:mushroom_red", "flowers:mushroom_brown"}},
+		{"none", 					{"flowers:waterlily"}, {deleteentrys={"on_place"}}},
+	}
+	add_nodes_type_from_table(node_texture_modifier.registrations.flowers)
+end
+
 
 
 

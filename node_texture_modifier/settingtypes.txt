@@ -1,2 +1,2 @@
 #Config
-node_texture_modifier_display_node_type (Display Nodetyp) bool true
+node_texture_modifier_disable_dyeing (Disable dyeing) bool false

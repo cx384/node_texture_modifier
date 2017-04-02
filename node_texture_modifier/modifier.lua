@@ -39,13 +39,13 @@ function node_texture_modifier.add_node_too_type(node, node_type)
 		return
 	end
 
-	if not node_texture_modifier.node_types[""..node_type..""] then
-		node_texture_modifier.node_types[""..node_type..""] = {node}
+	if not node_texture_modifier.node_types[node_type] then
+		node_texture_modifier.node_types[node_type] = {node}
 	else
-		local ltable = node_texture_modifier.node_types[""..node_type..""]
+		local ltable = node_texture_modifier.node_types[node_type]
 		table.insert(ltable, node)
 		table.sort(ltable)
-		node_texture_modifier.node_types[""..node_type..""] = ltable
+		node_texture_modifier.node_types[node_type] = ltable
 	end
 end
 
@@ -54,13 +54,13 @@ function node_texture_modifier.add_dyed_node_too_type(node, dyed_node_type)
 		return
 	end
 
-	if not node_texture_modifier.dyed_node_types[""..dyed_node_type..""] then
-		node_texture_modifier.dyed_node_types[""..dyed_node_type..""] = {node}
+	if not node_texture_modifier.dyed_node_types[dyed_node_type] then
+		node_texture_modifier.dyed_node_types[dyed_node_type] = {node}
 	else
-		local ltable = node_texture_modifier.dyed_node_types[""..dyed_node_type..""]
+		local ltable = node_texture_modifier.dyed_node_types[dyed_node_type]
 		table.insert(ltable, node)
 		table.sort(ltable)
-		node_texture_modifier.dyed_node_types[""..dyed_node_type..""] = ltable
+		node_texture_modifier.dyed_node_types[dyed_node_type] = ltable
 	end
 end
 
@@ -87,11 +87,11 @@ function node_texture_modifier.get_dyed_node_type(node)
 end
 
 function node_texture_modifier.get_type_nodes(node_type)
-	return node_texture_modifier.node_types[""..node_type..""]
+	return node_texture_modifier.node_types[node_type]
 end
 
 function node_texture_modifier.get_type_dyed_nodes(dyed_node_type)
-	return node_texture_modifier.dyed_node_types[""..dyed_node_type..""]
+	return node_texture_modifier.dyed_node_types[dyed_node_type]
 end
 
 local function update_formspec(pos)
@@ -113,6 +113,9 @@ local function update_formspec(pos)
 	if node_types then
 		maxpage = math.ceil(#node_types / inv:get_size("out"))
 	end
+	if dyed_node_types then
+		maxpage = math.ceil(#dyed_node_types / inv:get_size("out"))
+	end
 	if page > maxpage then
 		meta:set_int("page", maxpage)
 	end
@@ -120,60 +123,36 @@ local function update_formspec(pos)
 		modename = "Chisel"
 		modeimage = "node_texture_modifier_hammer_and_chisel.png"
 		dsnode_type = node_type
-	elseif meta:get_string("mode")=="brush"then
+	elseif meta:get_string("mode")=="brush" then
 		modename = "Brush"
 		modeimage = "node_texture_modifier_brush_and_dye.png"
 		dsnode_type = dyed_node_type
 	end
 	
-	if minetest.setting_get("node_texture_modifier_display_node_type")=="true" or
-	not minetest.setting_get("node_texture_modifier_display_node_type") then
-		meta:set_string("formspec", 
-			"size[10,11]" ..
-			default.gui_bg ..
-			default.gui_bg_img ..
-			default.gui_slots ..
-			"list[current_name;in;0.5,0.3;1,1;]" ..
-			"list[current_name;out;2.5,0.3;7,6;]" ..
-			"list[current_player;main;1,6.85;8,1;]" ..
-			"list[current_player;main;1,8.08;8,3;8]" ..
-			"listring[current_player;main]" ..
-			"listring[current_name;in]" ..
-			"listring[current_player;main]" ..
-			"listring[current_name;out]" ..
-			"list[current_name;store;0,3.3;2,2;]" ..
-			"image[0,3.3;1,1;node_texture_modifier_dye_mixture.png]" ..
-			"image[0.2,0;1.7,1.7;gui_hotbar_selected.png]" ..
-			"button[0,2.2;1,1;mode;"..modename.."]" ..
-			"image[1,2.2;1,1;"..modeimage.."]" ..
-			"label[0,1.6;Node Type: "..dsnode_type.."]" ..
-			"label[0,5.3;Page: "..page.."]" ..
-			"button[0,5.7;1,1;left;<-]" ..
-			"button[1,5.7;1,1;right;->]" ..
-			"image[0.2,0;1.7,1.7;gui_hotbar_selected.png]" ..
-			default.get_hotbar_bg(1,6.85))
-	--[[
-	else
-		meta:set_string("formspec", 
-			"size[9,10]" ..
-			default.gui_bg ..
-			default.gui_bg_img ..
-			default.gui_slots ..
-			"list[current_name;in;0.3,0.3;1,1;]" ..
-			"list[current_name;out;2,0.3;7,5;]" ..
-			"list[current_player;main;1,5.85;8,1;]" ..
-			"list[current_player;main;1,7.08;8,3;8]" ..
-			"listring[current_player;main]" ..
-			"listring[current_name;in]" ..
-			"listring[current_player;main]" ..
-			"listring[current_name;out]" ..
-			"label[0,4;Page: "..page.."]" ..
-			"button[0,4.5;1,1;left;<-]" ..
-			"button[1,4.5;1,1;right;->]" ..
-			"image[0,0;1.7,1.7;gui_hotbar_selected.png]" ..
-			default.get_hotbar_bg(1,5.85))
-	]]--
-	end
+	meta:set_string("formspec", 
+		"size[10,11]" ..
+		default.gui_bg ..
+		default.gui_bg_img ..
+		default.gui_slots ..
+		"list[current_name;in;0.5,0.3;1,1;]" ..
+		"list[current_name;out;2.5,0.3;7,6;]" ..
+		"list[current_player;main;1,6.85;8,1;]" ..
+		"list[current_player;main;1,8.08;8,3;8]" ..
+		"listring[current_player;main]" ..
+		"listring[current_name;in]" ..
+		"listring[current_player;main]" ..
+		"listring[current_name;out]" ..
+		"list[current_name;store;0,3.3;2,2;]" ..
+		"image[0,3.3;1,1;node_texture_modifier_dye_mixture.png]" ..
+		"image[0.2,0;1.7,1.7;gui_hotbar_selected.png]" ..
+		"button[0,2.2;1,1;mode;"..modename.."]" ..
+		"image[1,2.2;1,1;"..modeimage.."]" ..
+		"label[0,1.6;Node Type: "..dsnode_type.."]" ..
+		"label[0,5.3;Page: "..page.."]" ..
+		"button[0,5.7;1,1;left;<-]" ..
+		"button[1,5.7;1,1;right;->]" ..
+		"image[0.2,0;1.7,1.7;gui_hotbar_selected.png]" ..
+		default.get_hotbar_bg(1,6.85))
 	
 	for slot=1, inv:get_size("out") do
 		inv:set_stack("out", slot, "")
@@ -192,7 +171,8 @@ local function update_formspec(pos)
 	end
 	
 	if mode =="brush" then
-		if inv:is_empty("in") or dyed_node_type=="----" then
+		if inv:is_empty("in") or dyed_node_type=="----" 
+			or minetest.setting_get("node_texture_modifier_disable_dyeing") == "true" then
 		else
 			if inv:contains_item("store", "node_texture_modifier:dye_mixture "..inputcount) then
 				local slotspside = inv:get_size("out")*(page-1)

@@ -1,0 +1,3 @@
+node_texture_modifier
+ntm_minetest_game_registrations?
+ntm_some_other_mod_registrations?
