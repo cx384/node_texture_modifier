@@ -1,3 +1,3 @@
-WTFPL  for everything what was not taken from the minetest game
+WTFPL  for everything what was not taken from the minetest game or other sources (look in each file)
 (author: cx384) 
 

@@ -280,6 +280,7 @@ local function make_nodes_for_table(texture_pack, typenodestable)
 			end
 			
 			-- trapdoors (imperfect)
+			-- bugs: if you dig an opened trapdoor it drops an unknown item 
 			if node_attribute and table_contains("trapdoor", node_attribute) then
 				local nodetable = table.copy(minetest.registered_nodes[reginode])
 				local new_name = "node_texture_modifier:"..texture_pack_name.."_"..get_nwomn(reginode)
@@ -332,12 +333,42 @@ local function make_nodes_for_table(texture_pack, typenodestable)
 				break
 			end
 			
-			--[[
 			-- fencegates (imperfect)
 			if node_attribute and table_contains("fencegate", node_attribute) then
+				local nodetable = table.copy(minetest.registered_nodes[reginode])
+				local new_name = "node_texture_modifier:"..texture_pack_name.."_"..get_nwomn(reginode)
+				local fencegatetable = {}
+				local texture = nodetable.tiles[1]
+				local new_textures = 0
+				fencegatetable.description = texture_pack.." "..nodetable.description
+				fencegatetable.groups = nodetable.groups
+				fencegatetable.sounds = nodetable.sounds
+				fencegatetable.material = "default:wood"
+				
+				if setting_show_nodes_in_creative_inventory ~= "true" then
+					fencegatetable.groups.not_in_creative_inventory = 1
+				end
+				
+				if get_and_check_texture(texture_pack, texture, texture_pack_name) then
+					fencegatetable.texture = "node_texture_modifier_"..texture_pack_name.."_"..texture
+					new_textures = new_textures+1
+				else
+					fencegatetable.texture = texture
+				end
+
+				if new_textures > 0 then
+					doors.register_fencegate(string.sub(new_name, 1, -8), fencegatetable)
+					minetest.clear_craft({output = new_name})
+					
+					node_texture_modifier.add_node_too_type(new_name, node_texture_modifier.get_node_type(reginode))
+					local dye_type = node_texture_modifier.get_dyed_node_type(reginode)
+					if dye_type then
+						node_texture_modifier.add_dyed_node_too_type(new_name, dye_type)
+					end
+				end
+				
 				break
 			end
-			]]--
 			
 			-- panes (imperfect)
 			if node_attribute and table_contains("pane", node_attribute) then
@@ -387,6 +418,7 @@ local function make_nodes_for_table(texture_pack, typenodestable)
 				
 				if new_textures > 0 then
 					xpanes.register_pane(new_name, panetable)
+					minetest.clear_craft({output = "xpanes:"..new_name.."_flat"})
 				
 					node_texture_modifier.add_node_too_type("xpanes:"..new_name.."_flat", node_texture_modifier.get_node_type(reginode))
 					local dye_type = node_texture_modifier.get_dyed_node_type(reginode)
