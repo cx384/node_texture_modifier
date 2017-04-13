@@ -52,8 +52,3 @@ if minetest.setting_get("node_texture_modifier_disable_dyeing") ~= "true" then
 		})
 	end
 end
-
-
-
-
-

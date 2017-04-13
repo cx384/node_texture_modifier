@@ -16,10 +16,10 @@ vessels?
 walls?
 xpanes?
 flowers?
+stairs?
 
 creative?
 fire?
 give_initial_stuff?
 screwdriver?
 sethome?
-stairs?

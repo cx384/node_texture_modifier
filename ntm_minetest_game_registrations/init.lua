@@ -229,7 +229,15 @@ if minetest.get_modpath("flowers") then
 	add_nodes_type_from_table(node_texture_modifier.registrations.flowers)
 end
 
-
-
-
-
+if minetest.get_modpath("stairs") then
+	local allstairs = {}
+	for nodename, nodetable in pairs(minetest.registered_nodes) do
+		if string.sub(nodename,1,7) == "stairs:" then
+			table.insert(allstairs, nodename)
+		end
+	end
+	node_texture_modifier.registrations.stairs = {
+		{"none",	allstairs},
+	}
+	add_nodes_type_from_table(node_texture_modifier.registrations.stairs)
+end
