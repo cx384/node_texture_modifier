@@ -204,3 +204,16 @@ if minetest.get_modpath("xdecor") then
 	}
 	add_nodes_type_from_table(node_texture_modifier.registrations.xdecor)
 end
+
+if minetest.get_modpath("technic") then
+	node_texture_modifier.registrations.technic = {
+		{"none", 			{"technic:mineral_uranium", "technic:mineral_chromium", 
+			"technic:mineral_zinc", "technic:mineral_lead", "technic:mineral_sulfur"}},
+		{"none", 			{"technic:uranium_block", "technic:chromium_block", 
+			"technic:zinc_block", "technic:lead_block", "technic:cast_iron_block",
+			"technic:carbon_steel_block", "technic:stainless_steel_block", "technic:brass_block"}},
+		{"granite", 			{"technic:granite"}},
+		{"marble", 				{"technic:marble", "technic:marble_bricks"}},
+	}
+	add_nodes_type_from_table(node_texture_modifier.registrations.technic)
+end

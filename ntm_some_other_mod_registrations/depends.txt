@@ -5,3 +5,4 @@ darkage?
 mining_plus?
 itemframes?
 xdecor?
+technic?
